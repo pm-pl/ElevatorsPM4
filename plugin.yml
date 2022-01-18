@@ -1,5 +1,5 @@
 name: ElevatorsPM4
-main: zOmArRD\elevators\Main
+main: zOmArRD\elevators\Elevator
 src-namespace-prefix: zOmArRD\elevators
 version: 1.0.0
 api: 4.0.0
