@@ -30,6 +30,7 @@ final class Config
 
 	public function init(): void
 	{
+		/** Can this be removed? */
 		if (!@mkdir($patch = $this->getDataFolder()) && !is_dir($patch)) {
 			throw new \RuntimeException(sprintf('Directory "%s" was not created', $patch));
 		}
