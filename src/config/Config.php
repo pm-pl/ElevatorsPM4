@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace zOmArRD\elevators\config;
 
 use pocketmine\utils\Config as PMConfig;
+use RuntimeException;
 use zOmArRD\elevators\Elevator;
 
 final class Config
@@ -32,7 +33,7 @@ final class Config
 	{
 		/** Can this be removed? */
 		if (!@mkdir($patch = $this->getDataFolder()) && !is_dir($patch)) {
-			throw new \RuntimeException(sprintf('Directory "%s" was not created', $patch));
+			throw new RuntimeException(sprintf('Directory "%s" was not created', $patch));
 		}
 
 		foreach ($this->files as $file => $version) {

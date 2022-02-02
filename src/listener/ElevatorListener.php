@@ -35,6 +35,9 @@ final class ElevatorListener implements Listener
 		return $this->elevator;
 	}
 
+	/**
+	 * @todo Fix Spam message
+	 */
 	public function SignChangeEvent(SignChangeEvent $event): void
 	{
 		$player = $event->getPlayer();

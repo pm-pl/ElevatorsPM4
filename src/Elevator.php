@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace zOmArRD\elevators;
 
+use AttachableLogger;
 use pocketmine\plugin\PluginBase;
 use zOmArRD\elevators\config\Config;
 use zOmArRD\elevators\listener\ElevatorListener;
@@ -18,7 +19,7 @@ use zOmArRD\elevators\listener\ElevatorListener;
 final class Elevator extends PluginBase
 {
 	public static Elevator $instance;
-	public static \AttachableLogger $logger;
+	public static AttachableLogger $logger;
 	public static string $up, $down, $first;
 
 	public static function getInstance(): Elevator
@@ -44,7 +45,7 @@ final class Elevator extends PluginBase
 		self::$up = $actions[0];
 		self::$down = $actions[1];
 
-		self::$logger->info("§a". "Elevators by zOmArRD :)");
+		self::$logger->info("§a" . "Elevators by zOmArRD :)");
 	}
 
 	public function getSignLines(): array
