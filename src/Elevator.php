@@ -44,8 +44,6 @@ final class Elevator extends PluginBase
 		self::$first = strtolower($this->getSignLines()["first"]);
 		self::$up = $actions[0];
 		self::$down = $actions[1];
-
-		self::$logger->info("§a" . "Elevators by zOmArRD :)");
 	}
 
 	public function getSignLines(): array
