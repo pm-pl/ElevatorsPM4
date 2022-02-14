@@ -4,6 +4,5 @@ branches:
 - main
 projects:
   ElevatorsPM4:
-    icon: "icon.png"
     path: ""
 ...
