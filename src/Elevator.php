@@ -18,41 +18,41 @@ use zOmArRD\elevators\listener\ElevatorListener;
 
 final class Elevator extends PluginBase
 {
-	public static Elevator $instance;
-	public static AttachableLogger $logger;
-	public static string $up, $down, $first;
+    public static Elevator $instance;
+    public static AttachableLogger $logger;
+    public static string $up, $down, $first;
 
-	public static function getInstance(): Elevator
-	{
-		return self::$instance;
-	}
+    public static function getInstance(): Elevator
+    {
+        return self::$instance;
+    }
 
-	protected function onLoad(): void
-	{
-		self::$instance = $this;
-		self::$logger = $this->getLogger();
+    protected function onLoad(): void
+    {
+        self::$instance = $this;
+        self::$logger = $this->getLogger();
 
-		new Config();
-	}
+        new Config();
+    }
 
-	protected function onEnable(): void
-	{
-		new ElevatorListener($this);
+    protected function onEnable(): void
+    {
+        new ElevatorListener($this);
 
-		$actions = explode(":", strtolower($this->getSignLines()["second"]));
+        $actions = explode(":", strtolower($this->getSignLines()["second"]));
 
-		self::$first = strtolower($this->getSignLines()["first"]);
-		self::$up = $actions[0];
-		self::$down = $actions[1];
-	}
+        self::$first = strtolower($this->getSignLines()["first"]);
+        self::$up = $actions[0];
+        self::$down = $actions[1];
+    }
 
-	public function getSignLines(): array
-	{
-		$file = Config::getPluginConfig()->get('sign-lines');
+    public function getSignLines(): array
+    {
+        $file = Config::getPluginConfig()->get('sign-lines');
 
-		return [
-			"first" => $file["first"],
-			"second" => $file["second"]
-		];
-	}
+        return [
+            "first" => $file["first"],
+            "second" => $file["second"]
+        ];
+    }
 }

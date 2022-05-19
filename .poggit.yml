@@ -5,4 +5,10 @@ branches:
 projects:
   ElevatorsPM4:
     path: ""
+    type: "plugin"
+    excludeDirs:
+      - "assets/"
+    excludeFiles:
+      - ".gitignore"
+      - "icon.png"
 ...

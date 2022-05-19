@@ -17,60 +17,60 @@ use zOmArRD\elevators\Elevator;
 
 final class Config
 {
-	public static PMConfig $plugin_config;
-	private static Config $instance;
-	private array $files = [
-		'config.json' => 1.0
-	];
+    public static PMConfig $plugin_config;
+    private static Config $instance;
+    private array $files = [
+        'config.json' => 1.1
+    ];
 
-	public function __construct()
-	{
-		self::$instance = $this;
-		$this->init();
-	}
+    public function __construct()
+    {
+        self::$instance = $this;
+        $this->init();
+    }
 
-	public function init(): void
-	{
-		/** Can this be removed? */
-		if (!@mkdir($patch = $this->getDataFolder()) && !is_dir($patch)) {
-			throw new RuntimeException(sprintf('Directory "%s" was not created', $patch));
-		}
+    public function init(): void
+    {
+        /** Can this be removed? */
+        if (!@mkdir($patch = $this->getDataFolder()) && !is_dir($patch)) {
+            throw new RuntimeException(sprintf('Directory "%s" was not created', $patch));
+        }
 
-		foreach ($this->files as $file => $version) {
-			$this->saveResource($file);
+        foreach ($this->files as $file => $version) {
+            $this->saveResource($file);
 
-			if ($this->getFile($file)->get('version') !== $version) {
-				Elevator::$logger->error("The $file aren't compatible with the current version, the old file are in " . $this->getDataFolder() . "$file.old");
-				rename($this->getDataFolder() . $file, $this->getDataFolder() . $file . ".old");
-				$this->saveResource($file, true);
-			}
-		}
+            if ($this->getFile($file)->get('version') !== $version) {
+                Elevator::$logger->error("The $file aren't compatible with the current version, the old file are in " . $this->getDataFolder() . "$file.old");
+                rename($this->getDataFolder() . $file, $this->getDataFolder() . $file . ".old");
+                $this->saveResource($file, true);
+            }
+        }
 
-		self::$plugin_config = $this->getFile('config.json');
-	}
+        self::$plugin_config = $this->getFile('config.json');
+    }
 
-	public function getDataFolder(): string
-	{
-		return Elevator::getInstance()->getDataFolder();
-	}
+    public function getDataFolder(): string
+    {
+        return Elevator::getInstance()->getDataFolder();
+    }
 
-	public function saveResource(string $file, bool $replace = false): void
-	{
-		Elevator::getInstance()->saveResource($file, $replace);
-	}
+    public static function getInstance(): Config
+    {
+        return self::$instance;
+    }
 
-	public function getFile(string $file): PMConfig
-	{
-		return new PMConfig($this->getDataFolder() . $file);
-	}
+    public function saveResource(string $file, bool $replace = false): void
+    {
+        Elevator::getInstance()->saveResource($file, $replace);
+    }
 
-	public static function getInstance(): Config
-	{
-		return self::$instance;
-	}
+    public function getFile(string $file): PMConfig
+    {
+        return new PMConfig($this->getDataFolder() . $file);
+    }
 
-	public static function getPluginConfig(): PMConfig
-	{
-		return self::$plugin_config;
-	}
+    public static function getPluginConfig(): PMConfig
+    {
+        return self::$plugin_config;
+    }
 }
